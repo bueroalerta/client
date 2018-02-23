@@ -396,8 +396,10 @@ func (h *TeamsHandler) LookupImplicitTeam(ctx context.Context, arg keybase1.Look
 	var team *teams.Team
 	team, res.Name, res.DisplayName, err =
 		teams.LookupImplicitTeam(ctx, h.G().ExternalG(), arg.Name, arg.Public)
-	res.TeamID = team.ID
-	res.TlfID = team.KBFSTLFID()
+	if err == nil {
+		res.TeamID = team.ID
+		res.TlfID = team.KBFSTLFID()
+	}
 	return res, err
 }
 
@@ -411,8 +413,10 @@ func (h *TeamsHandler) LookupOrCreateImplicitTeam(ctx context.Context, arg keyba
 	var team *teams.Team
 	team, res.Name, res.DisplayName, err = teams.LookupOrCreateImplicitTeam(ctx, h.G().ExternalG(),
 		arg.Name, arg.Public)
-	res.TeamID = team.ID
-	res.TlfID = team.KBFSTLFID()
+	if err == nil {
+		res.TeamID = team.ID
+		res.TlfID = team.KBFSTLFID()
+	}
 	return res, err
 }
 
