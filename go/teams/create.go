@@ -213,10 +213,10 @@ func makeSigAndPostRootTeam(ctx context.Context, g *libkb.GlobalContext, me *lib
 		libkb.LinkTypeTeamRoot,
 		1, /* seqno */
 		sigJSONAfterReverse,
-		nil,   /* prevLinkID */
-		false, /* hasRevokes */
+		nil, /* prevLinkID */
+		libkb.SigHasRevokes(false),
 		seqType,
-		false, /* ignoreIfUnsupported */
+		libkb.SigIgnoreIfUnsupported(false),
 	)
 	if err != nil {
 		return err
@@ -443,9 +443,9 @@ func generateNewSubteamSigForParentChain(g *libkb.GlobalContext, me *libkb.User,
 		parentTeam.GetLatestSeqno()+1,
 		newSubteamSigJSON,
 		prevLinkID,
-		false, /* hasRevokes */
+		libkb.SigHasRevokes(false),
 		seqType,
-		false, /* ignoreIfUnsupported */
+		libkb.SigIgnoreIfUnsupported(false),
 	)
 	if err != nil {
 		return nil, err
@@ -532,10 +532,10 @@ func generateHeadSigForSubteamChain(ctx context.Context, g *libkb.GlobalContext,
 		libkb.LinkTypeSubteamHead,
 		1, /* seqno */
 		subteamHeadSigJSON,
-		nil,   /* prevLinkID */
-		false, /* hasRevokes */
+		nil, /* prevLinkID */
+		libkb.SigHasRevokes(false),
 		seqType,
-		false, /* ignoreIfUnsupported */
+		libkb.SigIgnoreIfUnsupported(false),
 	)
 	if err != nil {
 		return
